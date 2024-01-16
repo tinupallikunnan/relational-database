@@ -1,0 +1,133 @@
+DDL for Fresh Burgers Now
+
+-- Create the customer table
+CREATE TABLE customer (
+  customerID INT(20) NOT NULL, 
+  firstname VARCHAR(100) NOT NULL,
+  surname VARCHAR(100) NOT NULL,
+  address VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  phone_number INT(20) NOT NULL,
+  allergy VARCHAR(100)  NULL,
+  PRIMARY KEY (customerID)
+);
+
+-- Populate the customer table with some sample data
+INSERT INTO customer (customerID, firstname, surname,address, email, phone_number, allergy) VALUES
+  (001, 'Fred', 'Flinstone','10 New street', 'fflinstone@gmail.com', 0987654321, 'yes'),
+  (002, 'Donald', 'Duck','20 Way street', 'donald@gmail.com', 0987654333, 'no'),
+  (003, 'Barbie', 'Doll','30 Doll street', 'barbie@gmail.com', 0987654321, 'no');
+  
+-- Create the order table
+CREATE TABLE `order` (
+  orderID INT(20) NOT NULL, 	
+  customerID INT(20) NOT NULL, 
+  employeeID INT(20) NOT NULL,
+  order_date DATETIME NOT NULL,
+  order_method VARCHAR(100) NOT NULL,
+  order_price VARCHAR(100) NOT NULL,
+  paymentID INT(20) NOT NULL,
+  PRIMARY KEY (orderID)
+);
+
+-- Populate the order table with some sample data
+INSERT INTO `order` (orderID, customerID, employeeID, order_date, order_method, order_price, paymentID) VALUES
+  (222, 001, 444,'2023-12-01 11:25:09', 'card', '10 pounds',50),
+  (223, 002, 445,'2023-12-02 05:25:09', 'cash', '3 pounds',51),
+  (224, 003, 446,'2023-12-03 09:25:09', 'card', '4 pounds',52);
+
+-- Create the employee table
+CREATE TABLE employee (
+  employeeID INT(20) NOT NULL, 	
+  storeID INT(20) NOT NULL, 
+  firstname VARCHAR(100) NOT NULL,
+  surname VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  phone_no INT(20) NOT NULL, 
+  PRIMARY KEY (employeeID)
+ );
+
+-- Populate the employee table with some sample data
+INSERT INTO employee (employeeID, storeID, firstname, surname, email, phone_no) VALUES
+  (444, 01, 'Max','Reily', 'max@gmail.com', 098765423),
+  (445, 02, 'Bluey','Dog', 'bluey@gamil.com', 0266536764),
+  (446, 03, 'Zoe','Cat', 'zoe@gmail.com', 98765432);
+
+-- Create the store table
+CREATE TABLE store (
+  storeID INT(20) NOT NULL,  
+  location VARCHAR(100) NOT NULL,
+  phone_number INT(20) NOT NULL,
+  company_id INT(20) NOT NULL,
+  company_name  VARCHAR(100) NOT NULL,
+  PRIMARY KEY (storeID)
+);
+
+-- Populate the store table with some sample data
+INSERT INTO store (storeID, location, phone_number, company_id, company_name) VALUES
+  (01, 'Edinburgh', 0787654321, 11, 'FBN'),
+  (02, 'Glasgow', 0737654321, 12, 'FBN'),
+  (03, 'London', 0887654321, 13, 'FBN');
+  
+-- Create the item table
+CREATE TABLE item (
+   itemID INT(20) NOT NULL, 
+   item_type VARCHAR(100) NOT NULL,
+   item_name VARCHAR(100) NOT NULL,
+   item_price FLOAT NOT NULL,
+   menu_no INT(20) NOT NULL, 
+   PRIMARY KEY (itemID)
+);
+
+-- Populate the item table with some sample data
+INSERT INTO item (itemID, item_type, item_name, item_price, menu_no) VALUES
+  (909, 'food', 'cheese burger', 3, 01),
+  (910, 'drink', 'irn bru', 4, 02),
+  (920, 'food', 'chips', 5, 03);
+
+-- Create the order_item table
+CREATE TABLE order_item (
+   id INT(20) NOT NULL,  
+   orderID INT(20) NOT NULL, 
+   itemID INT(20) NOT NULL,  
+   PRIMARY KEY (ID)
+);
+
+-- Populate the order_item table with some sample data
+INSERT INTO order_item (id, orderID, itemID) VALUES
+  (6789, 222, 909),
+  (6543, 223,910),
+  (6123, 224,920);
+
+-- Create the menu table
+CREATE TABLE menu (
+   menu_no INT(20) NOT NULL, 
+   menu_type VARCHAR(100) NOT NULL,
+   menu_name VARCHAR(100) NOT NULL,
+   PRIMARY KEY (menu_no)
+);
+
+-- Populate the menu table with some sample data
+INSERT INTO menu (menu_no, menu_type, menu_name) VALUES
+  (01, 'food', 'cheese burger'),
+  (02, 'drink', 'irn bru'),
+  (03, 'food', 'chips');
+
+-- Create the payment table
+CREATE TABLE payment (
+   paymentID INT(20) NOT NULL, 
+   payment_amount decimal(6,2) NOT NULL,
+   account_no VARCHAR(100) NOT NULL,
+   bsb_no VARCHAR(100) NOT NULL,
+   account_type VARCHAR(100) NOT NULL,
+   payment_type VARCHAR(100) NOT NULL,
+   customerID INT(20) NOT NULL,
+   PRIMARY KEY (paymentID)
+);
+
+-- Populate the payment table with some sample data
+INSERT INTO payment (paymentID, payment_amount,account_no,bsb_no,account_type,payment_type,customerID) VALUES
+  (50, 9.50, '1223 3456', '09-12-1222','classic','cash',001),
+  (51, 3, '2222 3456', '05-12-8222','classic','card',002),
+  (52, 6.50, '3333 3456', '08-72-1222','classic','cash',003);
+  
